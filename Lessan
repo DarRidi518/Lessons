@@ -1,0 +1,88 @@
+pizza_pepperoni = 1200
+pizza_margarita = 1000
+pizza_four_cheese = 1000
+drink_cola_sprite_fanta = 80
+drink_milkshake = 140
+drink_beer = 90
+snack_fries = 150
+snack_onion_rings = 200
+snack_mozzarella_sticks = 250
+desert_ice_cream = 50
+desert_tiramisu = 2000
+desert_secret = 10000
+
+print("Добро пожаловать в пиццерию 'невероятные приключения пиццы'!")
+
+
+def menu():
+    print("Вот наше меню:"
+              "\nПиццы: "
+              "\nПепперони 1200 р."
+              "\nМаргарита 1000 р."
+              "\nЧотiрi сiру 1000 р."
+              "\n----------------------------------------------"
+              "\nНапитки:"
+              "\nКола, спрайт, фанта 80 р."
+              "\nМилкшейки (ваниль, клубника, шоколад) 140 р."
+              "\nПиво 90 р."
+              "\n----------------------------------------------"
+              "\nСнеки:"
+              "\nКартофель фри 200 гр. 150 р."
+              "\nЛуковые кольца 200 гр. 200 р."
+              "\nПалочки моцареллы 300 гр. 250 р."
+              "\n----------------------------------------------"
+              "\nДесерты:"
+              "\nМороженное (ванильное, шоколадное, клубничное) 50 р."
+              "\nПироженное 'Тирамису' 200 р."
+              "\nЖаренный снег 10000 G.")
+    print("Готовы принять ваш заказ!")
+
+
+def food_select(pizza=None, drink=None, snack=None, desert=None):
+    if pizza != None:
+        print("Пицца", pizza)
+    elif drink != None:
+        print("Напиток", drink)
+    elif snack != None:
+        print("Снек", snack)
+    elif desert != None:
+        print("Десерт", desert)
+
+
+    def summ():
+        suma = 0
+        if pizza == "Пепперони":
+            suma = suma + pizza_pep
+        elif pizza == "Маргарита":
+            suma = suma + pizza_marg
+        elif pizza == "Четыре сыра":
+            suma = suma + pizza_cheese
+        if drink == "Кола" or "Спрайт" or "Фанта":
+            suma = suma + drink_cola_sprite_fanta
+        elif drink == "Шоколадный милкшейк" or "Клубничный милкшейк" or "Ванильный Милкшейк":
+            suma = suma + drink_milkshake
+        elif drink == "Пиво":
+            suma = suma + drink_beer
+        if snack == "Картофель фри" or "Картошка фри":
+            suma = suma + snack_fries
+        elif snack == "Луковые кольца":
+            suma = suma + snack_onion_rings
+        elif snack == "Палочки моцареллы":
+            suma = suma + snack_mozzarella_sticks
+        if desert == "Шоколадное мороженное" or "Клубничное мороженное" or "Ванильное мороженное":
+            suma = suma + desert_ice_cream
+        elif desert == "Тирамису" or "Пироженное Тирамису":
+            suma = suma + desert_tiramisu
+        elif desert == "Жаренный снег":
+            suma = suma + desert_secret
+    print(sum)
+    summ()
+
+
+menu()
+food_select(
+    pizza=str(input('Пиццу: ')),
+    drink=str(input('Напиток: ')),
+    snack=str(input('Снек: ')),
+    desert=str(input('Десерт: ')),
+)
