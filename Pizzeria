@@ -1,117 +1,120 @@
-from datetime import datetime, date
-import phonenumbers
-
-pizza_pepperoni = 1200
-pizza_margarita = 1000
-pizza_four_cheese = 1000
-drink_cola_sprite_fanta = 80
-drink_milkshake = 140
-drink_cocktail = 150
-snack_fries = 150
-snack_onion_rings = 200
-snack_mozzarella_sticks = 250
-desert_ice_cream = 50
-desert_tiramisu = 200
-desert_secret = 10000
+import sys
+import re
 food_list = []
 
 
 def registration():
-    date_1 = date(day=1, month=1, year=2007)
-    date_2 = date(day=1, month=1, year=1915)
-    phone_sample = "+70000000000"
     print("Добро пожаловать в приложение 'невероятные приключения пиццы'!")
     mail = input("Для регистрации сперва введите почту: ")
-    if "@mail.ru" in mail:
+    if "@mail.ru" or "@gmail.com" in mail:
         age = input("Напишите дату вашего рождения (ДД.ММ.ГГГГ): ")
-        if age == datetime.date.strptime(age, '%d.%m.%Y'):
-            if age > date_1 or age <date_2:
-                number = phonenumbers.parse(phone_sample)
-                phone_check = phonenumbers.is_valid_number(number)
-                if phone_check == True:
-                    name = input("Введите ваше ФИО: ")
-                elif phone_check == False:
-                    print("Неверный номер телефона.")
-            else:
-                print("Неверно указана дата рождения.")
+        if int(age[6:10]) >= 1915 or int(age[6:10]) <= 2007:
+            phone_num = input("Введите свой номер телефона (+7 000 000 00-00): ")
+            phone_check = re.search(r'^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$', phone_num)
+            if bool(phone_check) == True:
+                name = input("Введите ваше ФИО: ")
+                print("Регистрация прошла успешно! Добро пожаловать", name)
+            elif bool(phone_check) == False:
+                print("Неверный номер телефона.")
+                sys.exit()
         else:
             print("Неверно указана дата рождения.")
+            sys.exit()
     else:
         print("Неверно указана почта.")
+        sys.exit()
 
 
 def menu():
-     print("Вот наше меню:"
-              "\nПиццы: "
-               "\nПепперони 1200 р."
-               "\nМаргарита 1000 р."
-               "\nЧотiрi сiру 1000 р."
-               "\n----------------------------------------------"
-               "\nНапитки:"
-               "\nКола, спрайт, фанта 80 р."
-               "\nМилкшейки (ваниль, клубника, шоколад) 140 р."
-               "\nКоктейль 'Баунти' 150 р."
-               "\n----------------------------------------------"
-               "\nСнеки:"
-               "\nКартофель фри 200 гр. 150 р."
-               "\nЛуковые кольца 200 гр. 200 р."
-               "\nПалочки моцареллы 300 гр. 250 р."
-               "\n----------------------------------------------"
-               "\nДесерты:"
-               "\nМороженное (ванильное, шоколадное, клубничное) 50 р."
-               "\nПироженное 'Тирамису' 200 р."
-               "\nЖаренный снег 10000 G.")
-     print("Готовы принять ваш заказ!")
+      print("Вот наше меню:"
+               "\n-----------------------------------------------"
+               "\nПиццы: "
+                "\nПепперони 1200 р."
+                "\nМаргарита 1000 р."
+                "\nЧотiрi сiру 1000 р."
+                "\n----------------------------------------------"
+                "\nНапитки:"
+                "\nКола, спрайт, фанта 80 р."
+                "\nМилкшейки (ваниль, клубника, шоколад) 140 р."
+                "\nКоктейль 'Баунти' 150 р."
+                "\n----------------------------------------------"
+                "\nСнеки:"
+                "\nКартофель фри 200 гр. 150 р."
+                "\nЛуковые кольца 200 гр. 200 р."
+                "\nПалочки моцареллы 300 гр. 250 р."
+                "\n----------------------------------------------"
+                "\nДесерты:"
+                "\nМороженное (ванильное, шоколадное, клубничное) 50 р."
+                "\nПироженное 'Тирамису' 200 р."
+                "\nЖаренный снег 10000 G."
+                "\n----------------------------------------------")
+      print("Готовы принять ваш заказ!")
 
 
-def food_select(pizza=None, drink=None, snack=None, desert=None):
-     pizza = str(input('Пиццу: '))
-     drink = str(input('Напиток: '))
-     snack = str(input('Снек: '))
-     desert = str(input('Десерт: '))
-     if pizza != None:
-         food_list.append(pizza)
-     if drink != None:
-         food_list.append(drink)
-     if snack != None:
-         food_list.append(snack)
-     if desert != None:
-         food_list.append(desert)
+def food_all(pizza=None, drink=None, snack=None, desert=None):
+      pizza = str(input('Какую пиццу желаете?: '))
+      drink = str(input('Напиток?: '))
+      snack = str(input('Снек?: '))
+      desert = str(input('Десерт?: '))
+      if pizza != None:
+          food_list.append(pizza)
+      if drink != None:
+          food_list.append(drink)
+      if snack != None:
+          food_list.append(snack)
+      if desert != None:
+          food_list.append(desert)
 
 
-def summary():
-     summ = 0
-     for pizza in food_list:
-         if "Пепперони" in food_list:
-             summ = summ + pizza_pepperoni
-         elif "Маргарита" in food_list:
-             summ = summ + pizza_margarita
-         elif "Четыре сыра" in food_list:
-             summ = summ + pizza_four_cheese
-     for drink in food_list:
-         if "Кола" or "Спрайт" or "Фанта" in food_list:
-             summ = summ + drink_cola_sprite_fanta
-         elif "Шоколадный милкшейк" or "Клубничный милкшйек" or "Ванильный милкшейк" in food_list:
-             summ = summ + drink_milkshake
-         elif "Коктейль" or "Коктейль 'Баунти' " or "Коктейль Баунти" in food_list:
-             summ = summ + drink_cocktail
-     for snack in food_list:
-         if "Картошка фри" or "Картофель фри" in food_list:
-             summ = summ + snack_fries
-         elif "Палочки моцареллы" in food_list:
-             summ = summ + snack_mozzarella_sticks
-         elif "Луковые кольца" in food_list:
-             summ = summ + snack_onion_rings
-     for desert in food_list:
-         if "Ванильное мороженное" or "Шоколадное мороженное" or "Клубничное мороженное" in food_list:
-             summ = summ + desert_ice_cream
-         elif "Тирамису" or "Пироженное тирамису" in food_list:
-             summ = summ + desert_tiramisu
-         elif "Жаренный снег" in food_list:
-             summ = summ + desert_secret
-     print("С вас:", summ, "рублей")
+def payment():
+      summ = 0
+      for pizza in food_list:
+          if "Пепперони" in food_list:
+              summ = summ + 1200
+          elif "Маргарита" in food_list:
+              summ = summ + 1000
+          elif "Четыре сыра" in food_list:
+              summ = summ + 1000
+          else:
+              summ = summ + 0
+      for drink in food_list:
+          if "Кола" or "Спрайт" or "Фанта" in food_list:
+              summ = summ + 80
+          elif "Шоколадный милкшейк" or "Клубничный милкшйек" or "Ванильный милкшейк" in food_list:
+              summ = summ + 130
+          elif "Коктейль" or "Коктейль 'Баунти' " or "Коктейль Баунти" in food_list:
+              summ = summ + 150
+          else:
+              summ = summ + 0
+      for snack in food_list:
+          if "Картошка фри" or "Картофель фри" in food_list:
+              summ = summ + 150
+          elif "Палочки моцареллы" in food_list:
+              summ = summ + 250
+          elif "Луковые кольца" in food_list:
+              summ = summ + 200
+          else:
+              summ = summ + 0
+      for desert in food_list:
+          if "Ванильное мороженное" or "Шоколадное мороженное" or "Клубничное мороженное" in food_list:
+              total_summ = summ + 70
+          elif "Тирамису" or "Пироженное тирамису" in food_list:
+              total_summ = summ + 150
+          elif "Жаренный снег" in food_list:
+              total_summ = summ + 10000
+          else:
+              total_summ = summ + 0
+              print("С вас:", total_summ, "рублей")
+              payment_way = input("Оплата по карте или наличными: ")
+              if payment_way == "по карте" or "картой":
+                print("Ваш заказ будет готов и доставлен через 20 минут. Ожидайте!")
+              elif payment_way == "наличными":
+                cash = int(input("Введите сумму наминалов всех купюр для оплаты: "))
+                change = cash - total_summ
+                print("Вот ваша сдача:", change, "рублей")
+                print("Ваш заказ будет готов и доставлен через 20 минут. Ожидайте!")
 
 registration()
 menu()
-food_select()
-summary()
+food_all()
+payment()
