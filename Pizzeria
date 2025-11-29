@@ -71,10 +71,13 @@ def food_choose_and_chek():
       summ_1_2 = 0
       pizza = input('\nКакую пиццу желаете?: ')
       if pizza == "Пепперони":
+              pizza_cheque = "1200 р."
               summ_1 = summ_1 + 1200
       elif pizza == "Маргарита":
+              pizza_cheque = "1000 р."
               summ_1 = summ_1 + 1000
       elif pizza == "Четыре сыра":
+              pizza_cheque = "1000 р."
               summ_1 = summ_1 + 1000
       elif pizza == "Кастомная пицца":
           print("Список ингридиентов:"
@@ -121,59 +124,75 @@ def food_choose_and_chek():
               summ_1 = summ_1_2 + 500
           elif cheese == "":
               summ_1 = summ_1_2 + 0
+          pizza_cheque = summ_1
           print("Скоро будет сделанно!")
       elif pizza == "":
+              pizza_cheque = ""
               summ_1 = summ_1 + 0
       drink = input('Напиток?: ')
-      if drink == "Кола":
+      if drink == "Кола" or drink == "Фанта" or drink == "Спрайт":
+              drink_cheque = "80 р."
               summ_2 = summ_1 + 80
-      elif drink == "Спрайт":
-              summ_2 = summ_1 + 80
-      elif drink == "Фанта":
-              summ_2 = summ_1 + 80
-      elif drink == "Шоколадный милкшейк":
-              summ_2 = summ_1 + 140
-      elif drink == "Клубничный милкшйек":
-              summ_2 = summ_1 + 140
-      elif drink == "ванильный милкшйек":
+      elif drink == "Шоколадный милкшейк" or drink == "Клубничный милкшйек" or drink == "ванильный милкшйек":
+              drink_cheque = "140 р."
               summ_2 = summ_1 + 140
       elif drink == "Коктейль Баунти":
+              drink_cheque = "150 р."
               summ_2 = summ_1 + 150
       elif drink == "":
+              drink_cheque = ""
               summ_2 == summ_1
       snack = input('Снек?: ')
       if snack == "Картошка фри":
               summ_3 = summ_2 + 150
+              snack_cheque = "150 р."
       elif snack == "Луковые кольца":
               summ_3 = summ_2 + 200
+              snack_cheque = "200 р."
       elif snack == "Палочки моцареллы":
               summ_3 = summ_2 + 250
+              snack_cheque = "250 р."
       elif snack == "":
               summ_3 = summ_2 + 0
+              snack_cheque = ""
       desert = input('Десерт?: ')
-      if desert == "Ванильное мороженное":
+      if desert == "Ванильное мороженное" or desert == "Клубничное мороженное" or desert == "Шоколадное мороженное":
               total_summ = summ_3 + 70
-      if desert == "Клубничное мороженное":
-              total_summ = summ_3 + 70
-      if desert == "Шоколадное мороженное":
-              total_summ = summ_3 + 70
+              desert_cheque = "70 р."
       elif desert == "Тирамису":
               total_summ = summ_3 + 200
+              desert_cheque = "200 р."
       elif desert == "Жаренный снег":
               total_summ = summ_3 + 10000
+              desert_cheque = "10000 р."
       elif desert == "":
               total_summ = summ_3 + 0
-      print("\nВот ваш чек:"
-            "\n-----------------------"
-            "\n")
+              desert_cheque = ""
+
       payment_way = input("Оплата по карте или наличными: ")
-      if payment_way == "картой":
-              print("Ваш заказ будет готов и доставлен через 20 минут. Ожидайте!")
+      if payment_way == "Картой":
+              print("\nВот ваш чек:"
+            "\n---------------------------"
+            "\n|", pizza, pizza_cheque,
+            "\n|",drink, drink_cheque,
+            "\n|",snack, snack_cheque,
+            "\n|",desert, desert_cheque,
+            "\n|            Итого:", total_summ,"р."  
+            "\n---------------------------")
+              print("\nВаш заказ будет готов и доставлен через 20 минут. Ожидайте!")
       elif payment_way == "Наличными":
               cash = int(input("Введите общее кол-во денег для оплаты: "))
               if cash > total_summ:
                     change = cash - total_summ
-                    print("Вот ваша сдача:", change, "рублей")
+                    print("\nВот ваша сдача:", change, "рублей")
+                    print("\nВот ваш чек:"
+            "\n---------------------------"
+            "\n|", pizza, pizza_cheque,
+            "\n|",drink, drink_cheque,
+            "\n|",snack, snack_cheque,
+            "\n|",desert, desert_cheque,
+            "\n|            Итого:", total_summ,"р."  
+            "\n---------------------------")
                     print("Ваш заказ будет готов и доставлен через 20 минут. Ожидайте!")
                     sys.exit()
               elif cash < total_summ:
